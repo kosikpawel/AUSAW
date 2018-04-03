@@ -5,8 +5,125 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AUSAW"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+		WindowStartupLocation="CenterScreen"
+		Icon="Images/logo11.png"
+		Title="AUSAW" Width="1280" Height="720">
+
+	<!-- By dalo sie scrollowac przy zminiejszeniu okna -->
+	<ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto">
+		
+		<!-- Glowna siatka ma 3 wiersze na menu, glowne info i wyklady -->
+	<Grid x:Name="mainGrid" Background="#e6f0ff"
+		  HorizontalAlignment="Center">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="80"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>		
+		<!-- Menu w pierwszym wierszu glownej siatki -->
+		<DockPanel Grid.Row="0">
+			<Menu DockPanel.Dock="Top">
+				<MenuItem Height="30" Header="PDF" Click="ToPdf_Click"/>
+				<MenuItem Height="30" Header="Informacje" Click="Info_Click"/>
+			</Menu>
+		</DockPanel>		
+		<!-- Panel na glowne informacje -->
+		<StackPanel Grid.Row="1" Orientation="Horizontal" >
+			<!-- Panel na date -->
+			<DockPanel Margin="5 0 0 0">
+				<!-- Dzien -->
+				<TextBox x:Name="dayTbx"
+					 VerticalAlignment="Center" HorizontalAlignment="Center"
+					 FontSize="20" Width="30"
+					 MaxLength="2"
+					 KeyDown="digitValidation"
+					 Text="D"
+					 LostFocus="dayTbx_LostFocus"/>
+				<Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="-"/>
+				<!-- Miesiac -->
+				<TextBox x:Name="monthTbx"
+					 VerticalAlignment="Center" HorizontalAlignment="Center"
+					 FontSize="20" Width="30" 
+					 MaxLength="2"
+					 KeyDown="digitValidation"
+					 Text="M"
+					 LostFocus="monthTbx_LostFocus"/>
+				<Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="-"/>
+				<!-- Rok -->
+				<TextBox x:Name="yearTbx"
+					 VerticalAlignment="Center" HorizontalAlignment="Center"
+					 FontSize="20" Width="55"
+					 MaxLength="4"
+					 KeyDown="digitValidation"
+					 Text="R"
+					 LostFocus="yearTbx_LostFocus"/>
+			</DockPanel>
+			<!-- Nazwa i opis -->
+			<TextBox 
+			x:Name="nameAndDescTbx"
+			TextWrapping="Wrap"
+			VerticalAlignment="Center"
+			Width="600" Margin="5 0 0 0"
+			FontSize="14"
+			MaxLength="300"
+			Height="60"
+			Text="Nazwa i opis wydarzenia"/>
+			<!-- Miejsce wydarzenia -->
+			<TextBox
+			x:Name="placeTbx"
+			TextWrapping="Wrap"
+			VerticalAlignment="Center"
+			Width="300" Margin="10 0 10 0"
+			FontSize="14"
+			MaxLength="150"
+			Height="60"
+			Text="Miejsce Wydarzenia"/>
+				<!-- Przycisk do edycji opisu -->
+			<Button x:Name="editMainEventBtn" 
+			Width="50"
+			Content="Zapisz"
+			HorizontalAlignment="Right"
+			Click="editSaveBtn_Click"
+			Margin="0 0 5 0"/>
+			<!-- Przycisk dodajacy wyklady -->
+			<Button x:Name="addLectureBtn"  
+			Width="50"
+			HorizontalAlignment="Right"
+			Click="addLectureBtn_Click"
+			Margin="0 0 5 0">
+				<TextBlock Text="Dodaj Wykład" TextWrapping="Wrap" TextAlignment="Center"/>
+			</Button>
+			<Button x:Name="deleteLecturesbtn"
+					Width="50"
+					HorizontalAlignment="Right"
+					Click="deleteLecturesbtn_Click"
+					Margin="0 0 10 0"
+					Content="Usuń"/>
+		</StackPanel>
+		<!-- Siatka w trzecim wierszu glownej siatki
+		 do niej dodawane beda nowe wyklady
+		-->
+		<Grid x:Name="gridForLectures" Grid.Row="2"
+			  ShowGridLines="True">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="80"/>
+			</Grid.RowDefinitions>		
+			<!-- Wzor znacznikow dla wykladu, 
+				dodawany dynamicznie przy dodaniu wykladu przyciskiem
+			<StackPanel x:Name="testStackPanel" Grid.Row="1"  Margin="5" Orientation="Horizontal">
+				<DockPanel>
+					<TextBox Width="25" Height="25" FontSize="16" KeyDown="digitValidation" MaxLength="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+					<Label Content=":" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+					<TextBox Width="25" Height="25" FontSize="16" KeyDown="digitValidation" MaxLength="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+					<Label Margin="10 0 10 0" FontSize="20" Content="-" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+					<TextBox Width="25" Height="25" FontSize="16" KeyDown="digitValidation" MaxLength="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+					<Label Content=":" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+					<TextBox Width="25" Height="25" FontSize="16" KeyDown="digitValidation" MaxLength="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+				</DockPanel>
+				<TextBox Margin="19 0 0 0" Width="750" FontSize="14" Height="60" TextWrapping="Wrap" MaxLength="150"/>
+				<TextBox Margin="19 0 0 0" Width="300" Height="60" MaxLength="70" TextWrapping="Wrap"/>
+			</StackPanel>-->
+		</Grid>
+	</Grid>
+	</ScrollViewer>
 </Window>
